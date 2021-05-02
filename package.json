@@ -1,0 +1,39 @@
+{
+  "name": "mdx-slides",
+  "version": "0.0.1",
+  "description": "Build awesome presentations using mdx",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "prettify": "pretty-quick --staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ameerthehacker/mdx-slides.git"
+  },
+  "keywords": [
+    "mdx",
+    "deck",
+    "slides",
+    "react"
+  ],
+  "author": "ameerthehacker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ameerthehacker/mdx-slides/issues"
+  },
+  "homepage": "https://github.com/ameerthehacker/mdx-slides#readme",
+  "devDependencies": {
+    "husky": "^4.3.8",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettify"
+    }
+  },
+  "dependencies": {
+    "pretty-quick": "^3.1.0"
+  }
+}
