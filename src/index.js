@@ -1,5 +1,9 @@
 function startDevServer(mdxSlide) {
-  console.log('Staring dev server for slides');
+  console.log(`Staring dev server for slide ${mdxSlide}`);
 }
 
-module.exports = { startDevServer }  
+function build(mdxSlide) {
+  console.log(`Building slide ${mdxSlide}`);
+}
+
+module.exports = { startDevServer, build };

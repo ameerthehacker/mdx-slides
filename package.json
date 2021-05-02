@@ -34,6 +34,12 @@
     }
   },
   "dependencies": {
-    "pretty-quick": "^3.1.0"
+    "@babel/core": "^7.14.0",
+    "babel-loader": "^8.2.2",
+    "chalk": "^4.1.1",
+    "minimist": "^1.2.5",
+    "pretty-quick": "^3.1.0",
+    "webpack": "^5.36.2",
+    "webpack-dev-server": "^3.11.2"
   }
 }
