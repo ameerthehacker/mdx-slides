@@ -34,6 +34,7 @@ function buildWebpackConfig({ entryMDX, isDev = false }) {
         {
           test: /\.mdx?$/,
           exclude: /node_modules/,
+          include: /node_modules\/mdx-slides/,
           use: [
             {
               loader: 'babel-loader',
@@ -52,6 +53,7 @@ function buildWebpackConfig({ entryMDX, isDev = false }) {
         {
           test: /\.js?$/,
           exclude: /node_modules/,
+          include: /node_modules\/mdx-slides/,
           use: [
             {
               loader: 'babel-loader',
