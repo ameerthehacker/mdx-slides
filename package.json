@@ -41,6 +41,7 @@
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@rooks/use-key": "^4.11.2",
     "babel-loader": "^8.2.2",
     "chalk": "^4.1.1",
     "express": "^4.17.1",
