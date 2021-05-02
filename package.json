@@ -50,6 +50,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-refresh": "^0.9.0",
+    "react-router-dom": "^5.2.0",
     "webpack": "^5.36.2",
     "webpack-dev-middleware": "^4.1.0",
     "webpack-hot-middleware": "^2.25.0"

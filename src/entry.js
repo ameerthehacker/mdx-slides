@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MDXDocument from '@entry-mdx';
 import { MDXProvider } from '@mdx-js/react';
-import Slides from '@components/slides';
+import Wrapper from './components/wrapper';
 
 ReactDOM.render(
-  <MDXProvider>
-    <Slides>
-      <MDXDocument />
-    </Slides>
+  <MDXProvider
+    components={{
+      wrapper: Wrapper,
+    }}
+  >
+    <MDXDocument />
   </MDXProvider>,
   document.getElementById('root')
 );
