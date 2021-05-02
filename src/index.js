@@ -4,6 +4,13 @@ const { logError, logInfo } = require('./utils');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const VirtualModulesPlugin = require('webpack-virtual-modules');
+const express = require('express');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
+const cwd = process.cwd();
+const outputPath = path.join(cwd, 'dist');
 
 function generateWebpackConfig(entryMDX) {
   const entryFile = `
@@ -12,14 +19,19 @@ function generateWebpackConfig(entryMDX) {
     import MDXDocument from './${entryMDX}';
 
     ReactDOM.render(<MDXDocument />, document.getElementById('root'));
+
+    if (module && module.hot) {
+      module.hot.accept()
+    }
   `;
-  const cwd = process.cwd();
   const entryPath = path.join(cwd, './index.js');
-  const outputPath = path.join(cwd, 'dist');
   const htmlTemplatePath = path.join(__dirname, 'template.html');
 
   return {
-    entry: entryPath,
+    entry: [
+      entryPath,
+      'webpack-hot-middleware/client?reload=true&overlay=true',
+    ],
     output: {
       path: outputPath,
       clean: true,
@@ -30,11 +42,13 @@ function generateWebpackConfig(entryMDX) {
       rules: [
         {
           test: /\.mdx?$/,
+          exclude: /node_modules/,
           use: [
             {
               loader: 'babel-loader',
               options: {
                 presets: ['@babel/env', '@babel/preset-react'],
+                plugins: [require.resolve('react-refresh/babel')],
               },
             },
             {
@@ -50,6 +64,7 @@ function generateWebpackConfig(entryMDX) {
               loader: 'babel-loader',
               options: {
                 presets: ['@babel/env', '@babel/preset-react'],
+                plugins: [require.resolve('react-refresh/babel')],
               },
             },
           ],
@@ -65,12 +80,23 @@ function generateWebpackConfig(entryMDX) {
       new VirtualModulesPlugin({
         './index.js': entryFile,
       }),
+      new webpack.HotModuleReplacementPlugin(),
+      new ReactRefreshWebpackPlugin(),
     ],
   };
 }
 
-function startDevServer(mdxSlide) {
-  console.log(`Staring dev server for slide ${mdxSlide}`);
+function startDevServer(entryMDXSlide) {
+  const webpackConfig = generateWebpackConfig(entryMDXSlide);
+  const webpackCompiler = webpack(webpackConfig);
+  const app = express();
+
+  logInfo(`starting dev server`);
+
+  app.use(webpackHotMiddleware(webpackCompiler, { heartbeat: 500 }));
+  app.use(webpackDevMiddleware(webpackCompiler));
+
+  app.listen(process.env.PORT || 3000);
 }
 
 function build(entryMDXSlide) {
