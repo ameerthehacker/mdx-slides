@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// the {entryMDX} will be replaced before building step
-import MDXDocument from '{entryMDX}';
+import MDXDocument from '@entry-mdx';
 import { MDXProvider } from '@mdx-js/react';
+import Slides from '@components/slides';
 
 ReactDOM.render(
   <MDXProvider>
-    <MDXDocument />
+    <Slides>
+      <MDXDocument />
+    </Slides>
   </MDXProvider>,
   document.getElementById('root')
 );

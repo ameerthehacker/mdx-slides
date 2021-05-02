@@ -1,25 +1,20 @@
 const webpack = require('webpack');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const VirtualModulesPlugin = require('webpack-virtual-modules');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const path = require('path');
-const fs = require('fs');
 
 function buildWebpackConfig({ entryMDX, isDev = false }) {
   const cwd = process.cwd();
   const outputPath = path.join(cwd, 'dist');
   const entryFilePath = path.join(__dirname, 'entry.js');
-  const entryMDXPath = path.relative(cwd, entryMDX);
-  const entryFileContent = fs
-    .readFileSync(entryFilePath, { encoding: 'utf-8' })
-    .replace(/{entryMDX}/g, `./${entryMDXPath}`);
-  const entryFile = './index.js';
+  const entryMDXPath = path.resolve(cwd, entryMDX);
   const htmlTemplatePath = path.join(__dirname, 'index.html');
+  const componentsPath = path.join(__dirname, './components');
 
   return {
     entry: [
-      entryFile,
+      entryFilePath,
       isDev && 'webpack-hot-middleware/client?reload=true&overlay=true',
     ].filter(Boolean),
     output: {
@@ -28,6 +23,12 @@ function buildWebpackConfig({ entryMDX, isDev = false }) {
     },
     mode: isDev ? 'development' : 'production',
     devtool: 'source-map',
+    resolve: {
+      alias: {
+        '@components': componentsPath,
+        '@entry-mdx': entryMDXPath,
+      },
+    },
     module: {
       rules: [
         {
@@ -71,9 +72,6 @@ function buildWebpackConfig({ entryMDX, isDev = false }) {
         template: htmlTemplatePath,
       }),
       new NodePolyfillPlugin(),
-      new VirtualModulesPlugin({
-        [entryFile]: entryFileContent,
-      }),
       isDev && new webpack.HotModuleReplacementPlugin(),
       isDev && new ReactRefreshWebpackPlugin(),
     ].filter(Boolean),
