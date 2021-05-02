@@ -17,8 +17,16 @@ function generateWebpackConfig(entryMDX) {
     import React from 'react';
     import ReactDOM  from 'react-dom';
     import MDXDocument from './${entryMDX}';
+    import { MDXProvider } from "@mdx-js/react";
 
-    ReactDOM.render(<MDXDocument />, document.getElementById('root'));
+    ReactDOM.render(
+      <MDXProvider components={{
+        h1: (props) => <h1 {...props} style={{ color: 'red' }} />
+      }}>
+        <MDXDocument />
+      </MDXProvider>
+      , document.getElementById('root')
+    );
 
     if (module && module.hot) {
       module.hot.accept()
