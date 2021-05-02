@@ -4,33 +4,22 @@ const VirtualModulesPlugin = require('webpack-virtual-modules');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const path = require('path');
+const fs = require('fs');
 
 function buildWebpackConfig({ entryMDX, isDev = false }) {
   const cwd = process.cwd();
   const outputPath = path.join(cwd, 'dist');
-  const entryFile = `
-    import React from 'react';
-    import ReactDOM  from 'react-dom';
-    import MDXDocument from './${entryMDX}';
-    import { MDXProvider } from "@mdx-js/react";
-
-    ReactDOM.render(
-      <MDXProvider>
-        <MDXDocument />
-      </MDXProvider>
-      , document.getElementById('root')
-    );
-
-    if (module && module.hot) {
-      module.hot.accept()
-    }
-  `;
-  const entryPath = path.join(cwd, './index.js');
-  const htmlTemplatePath = path.join(__dirname, 'template.html');
+  const entryFilePath = path.join(__dirname, 'entry.js');
+  const entryMDXPath = path.relative(cwd, entryMDX);
+  const entryFileContent = fs
+    .readFileSync(entryFilePath, { encoding: 'utf-8' })
+    .replace(/{entryMDX}/g, `./${entryMDXPath}`);
+  const entryFile = './index.js';
+  const htmlTemplatePath = path.join(__dirname, 'index.html');
 
   return {
     entry: [
-      entryPath,
+      entryFile,
       isDev && 'webpack-hot-middleware/client?reload=true&overlay=true',
     ].filter(Boolean),
     output: {
@@ -83,7 +72,7 @@ function buildWebpackConfig({ entryMDX, isDev = false }) {
       }),
       new NodePolyfillPlugin(),
       new VirtualModulesPlugin({
-        './index.js': entryFile,
+        [entryFile]: entryFileContent,
       }),
       isDev && new webpack.HotModuleReplacementPlugin(),
       isDev && new ReactRefreshWebpackPlugin(),
