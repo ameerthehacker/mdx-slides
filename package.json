@@ -1,6 +1,6 @@
 {
   "name": "mdx-slides",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Build awesome presentations using mdx",
   "main": "src/index.js",
   "scripts": {
