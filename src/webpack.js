@@ -10,7 +10,6 @@ function buildWebpackConfig({ entryMDX, isDev = false }) {
   const entryFilePath = path.join(__dirname, 'entry.js');
   const entryMDXPath = path.resolve(cwd, entryMDX);
   const htmlTemplatePath = path.join(__dirname, 'index.html');
-  const componentsPath = path.join(__dirname, './components');
 
   return {
     entry: [
@@ -25,7 +24,6 @@ function buildWebpackConfig({ entryMDX, isDev = false }) {
     devtool: 'source-map',
     resolve: {
       alias: {
-        '@components': componentsPath,
         '@entry-mdx': entryMDXPath,
       },
     },
