@@ -12,6 +12,7 @@ function buildViteConfig({ entryMDX, isDev = false }) {
     '@mdx-js/react',
     'react-router-dom',
     '@rooks/use-key',
+    'theme-ui',
   ];
 
   return {
