@@ -1,6 +1,6 @@
 {
   "name": "mdx-slides",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Build awesome presentations using mdx",
   "main": "src/index.js",
   "scripts": {
@@ -43,7 +43,6 @@
     "@rooks/use-key": "^4.11.2",
     "chalk": "^4.1.1",
     "minimist": "^1.2.5",
-    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
