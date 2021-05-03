@@ -13,6 +13,15 @@ function startDevServer(entryMDX) {
       server: {
         port: process.env.PORT || 3000,
       },
+      optimizeDeps: {
+        include: [
+          'prop-types',
+          'hoist-non-react-statics',
+          'react-is',
+          'path-to-regexp',
+          'react-dom',
+        ],
+      },
     })
     .then((server) => server.listen())
     .catch((err) => {
