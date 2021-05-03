@@ -1,5 +1,6 @@
 const path = require('path');
 const mdx = require('vite-plugin-mdx').default;
+const remarkEmojiPlugin = require('remark-emoji');
 
 function buildViteConfig({ entryMDX, isDev = false }) {
   const cwd = process.cwd();
@@ -30,7 +31,11 @@ function buildViteConfig({ entryMDX, isDev = false }) {
     },
     clearScreen: false,
     configFile: false,
-    plugins: [mdx()],
+    plugins: [
+      mdx({
+        remarkPlugins: [remarkEmojiPlugin],
+      }),
+    ],
   };
 }
 
