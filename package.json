@@ -38,25 +38,15 @@
     }
   },
   "dependencies": {
-    "@babel/core": "^7.14.0",
-    "@babel/preset-env": "^7.14.0",
-    "@babel/preset-react": "^7.13.13",
-    "@mdx-js/loader": "^1.6.22",
+    "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@rooks/use-key": "^4.11.2",
-    "babel-loader": "^8.2.2",
     "chalk": "^4.1.1",
-    "express": "^4.17.1",
-    "html-webpack-plugin": "^5.3.1",
     "minimist": "^1.2.5",
-    "node-polyfill-webpack-plugin": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-refresh": "^0.9.0",
     "react-router-dom": "^5.2.0",
-    "webpack": "^5.36.2",
-    "webpack-dev-middleware": "^4.1.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "vite": "^2.2.4",
+    "vite-plugin-mdx": "^3.5.5"
   }
 }
