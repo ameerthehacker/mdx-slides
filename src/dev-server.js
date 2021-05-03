@@ -1,21 +1,25 @@
-const webpack = require('webpack');
-const { logInfo } = require('./utils');
-const express = require('express');
-const buildWebpackConfig = require('./webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+const { logInfo, logError } = require('./utils');
+const buildViteConfig = require('./vite');
+const vite = require('vite');
 
 function startDevServer(entryMDX) {
-  const webpackConfig = buildWebpackConfig({ entryMDX, isDev: true });
-  const webpackCompiler = webpack(webpackConfig);
-  const app = express();
+  const viteConfig = buildViteConfig({ entryMDX, isDev: true });
 
-  logInfo(`starting webpack dev server`);
+  logInfo(`starting vite dev server`);
 
-  app.use(webpackHotMiddleware(webpackCompiler, { heartbeat: 500 }));
-  app.use(webpackDevMiddleware(webpackCompiler));
+  vite
+    .createServer({
+      ...viteConfig,
+      server: {
+        port: process.env.PORT || 3000,
+      },
+    })
+    .then((server) => server.listen())
+    .catch((err) => {
+      logError('failed to start vite dev server');
 
-  app.listen(process.env.PORT || 3000);
+      console.err(err);
+    });
 }
 
 module.exports = startDevServer;
