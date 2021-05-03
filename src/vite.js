@@ -5,6 +5,13 @@ function buildViteConfig({ entryMDX, isDev = false }) {
   const cwd = process.cwd();
   const outDir = path.join(cwd, 'dist');
   const entryMDXPath = path.resolve(cwd, entryMDX);
+  const prebundleDeps = [
+    'react',
+    'react-dom',
+    '@mdx-js/react',
+    'react-router-dom',
+    '@rooks/use-key',
+  ];
 
   return {
     mode: isDev ? 'development' : 'production',
@@ -17,6 +24,9 @@ function buildViteConfig({ entryMDX, isDev = false }) {
       alias: {
         '@entry-mdx': entryMDXPath,
       },
+    },
+    optimizeDeps: {
+      include: prebundleDeps,
     },
     clearScreen: false,
     configFile: false,

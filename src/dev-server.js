@@ -13,21 +13,12 @@ function startDevServer(entryMDX) {
       server: {
         port: process.env.PORT || 3000,
       },
-      optimizeDeps: {
-        include: [
-          'prop-types',
-          'hoist-non-react-statics',
-          'react-is',
-          'path-to-regexp',
-          'react-dom',
-        ],
-      },
     })
     .then((server) => server.listen())
     .catch((err) => {
       logError('failed to start vite dev server');
 
-      console.err(err);
+      console.error(err);
     });
 }
 
