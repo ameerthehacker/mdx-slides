@@ -4,9 +4,19 @@ import Wrapper from './components/wrapper';
 import { ThemeProvider } from 'theme-ui';
 import defaultTheme from '../themes/default';
 import * as MDX from '@entry-mdx';
+import { createGlobalStyle } from 'styled-components';
 
+const GlobalStyles = createGlobalStyle`
+ * {
+   padding: 0px;
+   margin: 0px;
+ }
+ #root {
+   height: 100vh;
+ }
+`;
 const MDXDocument = MDX.default;
-const theme = MDX.theme || defaultTheme;
+const theme = MDX.theme ? { ...defaultTheme, ...MDX.theme } : defaultTheme;
 
 if (theme.googleFont) {
   const linkTag = document.createElement('link');
@@ -24,6 +34,7 @@ ReactDOM.render(
     }}
     theme={theme}
   >
+    <GlobalStyles />
     <MDXDocument />
   </ThemeProvider>,
   document.getElementById('root')

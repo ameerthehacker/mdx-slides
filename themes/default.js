@@ -1,31 +1,73 @@
-const yellow = '#fd0';
-
+// base theme
 export default {
-  googleFont:
-    'https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Roboto+Mono',
-  fonts: {
-    body: '"Roboto Condensed", system-ui, sans-serif',
-    monospace: '"Roboto Mono", monospace',
-  },
   colors: {
-    text: '#000',
-    background: yellow,
-    primary: '#333',
+    text: '#fff',
+    background: '#000',
+    backdrop: '#111',
+  },
+  fonts: {
+    body: 'system-ui, sans-serif',
+    heading: 'inherit',
+    monospace: 'Menlo, monospace',
+  },
+  fontWeights: {
+    body: 400,
+    heading: 700,
+  },
+  lineHeights: {
+    body: 1.5,
+    heading: 1.125,
   },
   text: {
     heading: {
-      textTransform: 'uppercase',
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
     },
   },
   styles: {
-    pre: {
-      textAlign: 'left',
-      color: 'background',
-      bg: 'text',
+    root: {
+      fontFamily: 'system-ui, sans-serif',
+    },
+    img: {
+      width: '100vw',
+      maxWidth: '100%',
+      height: '100vh',
+      objectFit: 'contain',
+    },
+    h1: {
+      variant: 'text.heading',
+    },
+    h2: {
+      variant: 'text.heading',
+    },
+    h3: {
+      variant: 'text.heading',
+    },
+    h4: {
+      variant: 'text.heading',
+    },
+    h5: {
+      variant: 'text.heading',
+    },
+    h6: {
+      variant: 'text.heading',
     },
     code: {
-      color: 'background',
-      bg: 'text',
+      fontFamily: 'monospace',
+    },
+    pre: {
+      fontFamily: 'monospace',
+    },
+    Slide: {
+      fontFamily: 'body',
+      fontSize: '2em',
+    },
+    Header: {
+      px: 3,
+    },
+    Footer: {
+      px: 3,
     },
   },
 };

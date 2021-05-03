@@ -1,6 +1,15 @@
 import React from 'react';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
 import useKey from '@rooks/use-key';
+import styled from 'styled-components';
+
+const Slide = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default function Slides({ slides }) {
   const history = useHistory();
@@ -25,6 +34,10 @@ export default function Slides({ slides }) {
   if (!slide) {
     return <Redirect to="/1" />;
   } else {
-    return slides[slideNumber - 1];
+    return (
+      <Slide>
+        <div>{slides[slideNumber - 1]}</div>
+      </Slide>
+    );
   }
 }
